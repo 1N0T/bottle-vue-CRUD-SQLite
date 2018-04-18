@@ -1,37 +1,24 @@
 ![logo](https://raw.github.com/1N0T/images/master/global/1N0T.png)
-# bottleCRUD
-Ejemplo **RESTFull** con **python bottle** y **SQLite**.
 
-[Bottle](https://bottlepy.org/docs/dev/) es un microframework de python que, en un único fichero de unos cuantos KB., contiene todo lo necesario para crear un seridow WEB que propocione **servicios REST**.
+# bottle-vue-CRUD-SQLite
+Ejemplo **Vuejs** CRUD + api **REST** con python **Bottle** + **SQLite**
 
-Para ejecutar el servidor:
+[Bottle](https://bottlepy.org/docs/dev/) es un microframework de **python** que, en un único fichero de unos cuantos KB., contiene todo lo necesario para crear un seridor WEB que propocione **servicios REST**.
+
+[Vuejs](https://vuejs.org/) es un framework **javascript** que si no lo has probado, deberías hacerlo.
+
+El objetivo de este proyecto se proporcionar una plantilla para utilizar en aquellos casos en los que queremos crear una utilidad web en cualquier lugar y sin ser intrusivo. Si ya está instalado python, sólo necesitas copiar en cualquier lugar el minúsculo contenido de este proyecto.
+
+He creado un simple mantenimiento CRUD de una tabla de proyectos y la información se guarda en una BBDD SQlite.
+
+Para ejecutar el servidor WEB:
 
     python main.py
 
-Esto levanta un servidor WEB que escucha en [http://localhost:6789](http://localhost:6789) y que responde a los guientes comandos:
+Esto levanta un servidor WEB que escucha en [http://localhost:6789](http://localhost:6789) y podrás disfrutar de lo que te muestro a continuación.
 
-#### Añadir un registro a la tabla SQLite.
+![img01](https://raw.github.com/1N0T/images/master/bottle-vue-CRUD-SQLite/bottle-vue-CRUD-SQLite_01.png)
 
-    curl -i http://localhost:6789/OT/ -H "Content-type: application/json" -X POST -d '{"ot": "GMIK231", "descripcion": "Reg: 1", "tipo": "w", "orden": 10, "ultimo_transporte": "2018-01-05T12:23:15.000Z"}'
+![img02](https://raw.github.com/1N0T/images/master/bottle-vue-CRUD-SQLite/bottle-vue-CRUD-SQLite_02.png)
 
-#### Modificar el registro anterior.
-
-    curl -i http://localhost:6789/OT/ -H "Content-type: application/json" -X PUT -d '{"ot": "GMIK231", "descripcion": "Reg: 1 modificado", "tipo": "c", "orden": 11, "ultimo_transporte": "2018-01-05T12:28:15.000Z"}'
-    
-#### Recuperar todos los registros.
-
-    curl -i http://localhost:6789/OT/ -H "Content-type: application/json" -X GET
-    
-#### Recuperar un registro determinado.
-
-    curl -i http://localhost:6789/OT/GMIK231 -H "Content-type: application/json" -X GET
-    
-#### Recuperar los registros que cumplen las condiciones.
-
-    curl -i http://localhost:6789/OT/QRY/'\{"descripcionLike":"Reg"\}' -H "Content-type: application/json" -X GET
-    
-#### Borrar un registro determinado.
-
-    curl -i http://localhost:6789/OT/GMIK231 -H "Content-type: application/json" -X DELETE
-    
-    
+![img03](https://raw.github.com/1N0T/images/master/bottle-vue-CRUD-SQLite/bottle-vue-CRUD-SQLite_03.png)
