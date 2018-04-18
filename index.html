@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8"/>
+    <title>Proyectos</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./static/css/1N0T.css">
+  </head>
+  <body>
+    
+	<div id="app" class="container">    
+    <!-- Barrar superior -->
+    <img src="static/images/1N0T.svg" id="logo" class="w3-hide-small w3-hide-medium"/> 
+    <div class="w3-bar gradiente">
+      <div id="menu">
+        <i class="fa fa-bars w3-button w3-xlarge" onclick="w3_open()"></i>
+      </div>
+    </div>
+
+    <!-- Menú lateral -->
+    <div class="w3-sidebar w3-white w3-animate-left" style="z-index: 4; width: 300px; display: none" id="mySidebar">
+      <div id="myMenu" class="w3-bar-block">
+        <a class="w3-right puntero" href="#" onclick="w3_close()"><img src="static/images/flor.svg"/></a>
+
+        <router-link to="/" class="w3-bar-item w3-button" class-active="w3-theme-l3" onclick="w3_close()">
+          Home
+        </router-link>
+        <button class="w3-dropdown-click w3-button w3-left-align">Proyectos <i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-content">
+          <router-link to="/proyectos" class="w3-bar-item w3-button w3-margin-left" class-active="w3-theme-l3" onclick="w3_close()">
+            Mantenimiento de proyectos
+          </router-link>
+        </div>
+      </div>      
+    </div>
+    <div class="w3-overlay" onclick="w3_close()" style="cursor:pointer" id="myOverlay"></div>
+		<router-view></router-view>
+      
+  </div>
+
+  <!-- Cargamos Vue + Router + Axios -->
+  <script src="https://npmcdn.com/vue/dist/vue.min.js"></script>
+  <script src="https://npmcdn.com/vue-router/dist/vue-router.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+  <!-- Los 2 siguientes son necesarios para drag&drop  -->
+  <script src="//cdn.jsdelivr.net/npm/sortablejs@1.7.0/Sortable.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.16.0/vuedraggable.min.js"></script>
+  
+  <!-- Cargamos scripts de la aplicación  -->
+  <script src="static/js/mixins/globalForm.js"></script>
+  <script src="static/js/Home.js"></script>
+  <script src="static/js/Proyectos.js"></script>
+  <script src="static/js/router.js"></script>
+  <script src="static/js/index.js"></script>
+
+  <script>
+    // Gestionamos la visualización, o no, el menú lateral
+    function w3_open() {
+      document.getElementById("mySidebar").style.display = "block";
+      document.getElementById("myOverlay").style.display = "block";
+    }
+    function w3_close() {
+      document.getElementById("mySidebar").style.display = "none";
+      document.getElementById("myOverlay").style.display = "none";
+    }
+    // Inicializamos estado inicial del menú lateral
+    document.getElementById("myMenu").style.display = "block";
+    w3_close()
+  </script>
+
+  <script>
+    // Gestionamos el cierre y apertura de los dropdowns
+    var dropdown = document.getElementsByClassName("w3-dropdown-click");
+    var i;
+
+    for (i = 0; i < dropdown.length; i++) {
+      dropdown[i].addEventListener("click", function() {
+        var dropdownContent = this.nextElementSibling;
+        if (dropdownContent.style.display === "block") {
+          dropdownContent.style.display = "none";
+        } else {
+          dropdownContent.style.display = "block";
+        }
+      });
+    }
+  </script>
+  </body>
+</html>
+
+
