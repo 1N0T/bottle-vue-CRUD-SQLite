@@ -43,6 +43,24 @@ function searchIgnoringAccents(cadena, aBuscar) {
   }
 }
 
+sortObjectArrayByKey = function(arr, key, order="asc") { 
+  return arr.sort(
+            function( el_1, el_2 ) {
+              eln_1 = normalizeString(el_1[key])
+              eln_2 = normalizeString(el_2[key])
+              result = ( eln_1 < eln_2 ) ? -1 : ( eln_1 > eln_2 ? 1 : 0 );
+              if (order == "asc") {
+                return result;
+              } else { 
+                if (order == "desc") {
+                  return result * -1;
+                } else {
+                  throw "El tipo de ordenación tiene que ser 'asc' o 'desc'."
+                }
+              }
+            }
+          )
+}
 
 function objetoContieneValor( valor, objeto ) {
   if ( typeof valor != 'string' ) {

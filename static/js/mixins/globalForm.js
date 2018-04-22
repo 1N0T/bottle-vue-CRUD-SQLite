@@ -24,7 +24,12 @@ var globalForm = {
       
       lista: [],
       mensajes: [],
-      
+
+      ordenLista: {
+        columna: '',
+        orden: ''
+      },
+    
       mensajesAbierto: false,
       listaAbierta: false,
       filtroAbierto: false,
@@ -63,12 +68,16 @@ var globalForm = {
 
     postFiltrar() {
       this.lista = this.url.registros.slice()
-    },
+      this.ordenLista.columna = ''
+      this.ordenLista.orden = ''
+  },
 
     postGrabar() {
       if (this.url.status == 'OK') {
         this.onFichaNuevo()
         this.cargarTodo()
+        this.ordenLista.columna = ''
+        this.ordenLista.orden = ''
       }      
     },
 
@@ -140,6 +149,21 @@ var globalForm = {
         })
       })
     },
+
+    ordenarLista(columna) {
+      // Si la lista ya ha sido clasificada por la columna actual cambiamos el orden
+      if (this.ordenLista.columna == columna) {
+        if (this.ordenLista.orden == 'asc') {
+          this.ordenLista.orden = 'desc'
+        } else {
+          this.ordenLista.orden = 'asc'          
+        }
+      } else {
+        this.ordenLista.columna = columna
+        this.ordenLista.orden   = 'asc'
+      }
+      sortObjectArrayByKey(this.lista, this.ordenLista.columna, this.ordenLista.orden)
+    }
   
   },
 

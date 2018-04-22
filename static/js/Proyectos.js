@@ -1,6 +1,11 @@
 const Proyectos = Vue.component('proyectosComponent', { 
   template: `
     <div>
+
+      <!--
+      =======================================================================================
+      Botonera
+      =======================================================================================-->  
       <div class="botonera">
         <center>
         <div>
@@ -14,7 +19,10 @@ const Proyectos = Vue.component('proyectosComponent', {
       </div>
       <i class="fa fa-refresh fa-spin fa-3x fa-fw w3-xlarge trabajando" v-if="trabajando"></i>
 
-
+      <!--
+      =======================================================================================
+      Ventana de selección
+      =======================================================================================-->      
       <div v-if="filtroAbierto" class="w3-modal" style="display: block">
         <div class="w3-modal-content w3-card-4">
           <div class="w3-container w3-text-white gradiente">
@@ -68,7 +76,10 @@ const Proyectos = Vue.component('proyectosComponent', {
         </div>
       </div>
 
-      
+      <!--
+      =======================================================================================
+      Ventana de mensajes
+      =======================================================================================-->
       <div v-if="mensajesAbierto" class="w3-modal" style="display: block">
         <div class="w3-modal-content w3-card-4">
           <div class="w3-container w3-text-white gradiente">
@@ -90,8 +101,10 @@ const Proyectos = Vue.component('proyectosComponent', {
         </div>
       </div>
 
-
-
+      <!--
+      =======================================================================================
+      Lista de elementos
+      =======================================================================================-->
       <div class="w3-row w3-text-teal">
         <div class="w3-col lista" v-if="listaAbierta" :style="{height: windowHeight - 38 +'px', width: anchoLista + 'px'}">
           <div class=w3-row>
@@ -100,19 +113,30 @@ const Proyectos = Vue.component('proyectosComponent', {
             </div>
           </div>
           <div class=w3-row>
-            <div class="w3-col m3 cf"><b>Id.</b></div>
-            <div class="w3-col m9 cf"><b>Descripción</b></div>
+            <div class="w3-col m3 cf" @click="ordenarLista('id')">
+              <b>Id.</b> 
+              <span v-if="ordenLista.columna == 'id' && ordenLista.orden == 'asc'" ><i class="fa fa-caret-up"></span> 
+              <span v-if="ordenLista.columna == 'id' && ordenLista.orden == 'desc'"><i class="fa fa-caret-down"></span>
+            </div>
+            <div class="w3-col m9 cf" @click="ordenarLista('descripcion')">
+              <b>Descripción</b>
+              <span v-if="ordenLista.columna == 'descripcion' && ordenLista.orden == 'asc'" ><i class="fa fa-caret-up"></span> 
+              <span v-if="ordenLista.columna == 'descripcion' && ordenLista.orden == 'desc'"><i class="fa fa-caret-down"></span>
+            </div>
           </div>
           <div class="listacontent" :style="{height: windowHeight - 150 +'px', width: anchoLista + 'px'}">
           <div class="w3-row w3-hover-orange" v-for="item in listaFiltrada" @click="cargarRegistro(item.id)">
             <div class="w3-col m3 cf">{{ item.id }}</div>
             <div class="w3-col m9 cf">{{ item.descripcion }}</div>
           </div>
-          </div>
         </div>
+      </div>
 
-
-        <div class="w3-container w3-rest ficha" :style="{height: windowHeight - 38 +'px'}">
+      <!--
+      =======================================================================================
+      Ficha de datos
+      =======================================================================================-->
+      <div class="w3-container w3-rest ficha" :style="{height: windowHeight - 38 +'px'}">
           <form class="w3-text-teal w3-section w3-padding" @change="onFichaChange" @submit.prevent="onSubmit">
             <div class="w3-row">
               <div class="w3-col w3-right-align w3-margin-right s12 m2">

@@ -89,4 +89,5 @@ html,body {
   padding: 8px;
   overflow: hidden;
   text-overflow: ellipsis;
+  cursor: pointer;
 }
