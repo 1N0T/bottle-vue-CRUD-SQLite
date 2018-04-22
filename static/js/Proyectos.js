@@ -95,11 +95,16 @@ const Proyectos = Vue.component('proyectosComponent', {
       <div class="w3-row w3-text-teal">
         <div class="w3-col lista" v-if="listaAbierta" :style="{height: windowHeight - 38 +'px', width: anchoLista + 'px'}">
           <div class=w3-row>
+            <div class="w3-col m12 cf">
+              <input class="w3-input w3-border" type="text" v-model="filtroLista" placeholder="Filtrar lista por ...">
+            </div>
+          </div>
+          <div class=w3-row>
             <div class="w3-col m3 cf"><b>Id.</b></div>
             <div class="w3-col m9 cf"><b>Descripción</b></div>
           </div>
-          <div class="listacontent" :style="{height: windowHeight - 90 +'px', width: anchoLista + 'px'}">
-          <div class="w3-row w3-hover-orange" v-for="item in lista" @click="cargarRegistro(item.id)">
+          <div class="listacontent" :style="{height: windowHeight - 150 +'px', width: anchoLista + 'px'}">
+          <div class="w3-row w3-hover-orange" v-for="item in listaFiltrada" @click="cargarRegistro(item.id)">
             <div class="w3-col m3 cf">{{ item.id }}</div>
             <div class="w3-col m9 cf">{{ item.descripcion }}</div>
           </div>
@@ -217,10 +222,12 @@ const Proyectos = Vue.component('proyectosComponent', {
           {id: 5, nombre: 'Laura'},
         ],
         listaAbierta: true,
+        filtroLista: '',
         trabajando: false,
         registroNuevo: true,
       }
     },
+
     methods: {
       onFichaChange() {
         this.botones.guardar = true
@@ -234,7 +241,8 @@ const Proyectos = Vue.component('proyectosComponent', {
         })
         this.botones.guardar = false
         this.botones.borrar  = false
-        this.registroNuevo   = true      },
+        this.registroNuevo   = true
+      },
       onFiltroFiltrar() {
         this.urlQry()
         this.filtroAbierto = false
@@ -268,6 +276,17 @@ const Proyectos = Vue.component('proyectosComponent', {
         this.peticionAJAX('DELETE', this.url.base + this.url.entidad + '/' + this.url.clave, '', this.postBorrar)
       },        
     },
+
+    computed: {
+      listaFiltrada() {
+        return this.lista.filter(( objeto ) => {
+          let cadena = objeto['id'].toString() + objeto['descripcion'].toString()        
+          let aBuscar = this.filtroLista
+          return searchIgnoringAccents(cadena, aBuscar)
+        })
+      }    
+    },
+  
     mounted() {
       this.cargarTodo()
     }
