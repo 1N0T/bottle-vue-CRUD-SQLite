@@ -43,7 +43,7 @@ function searchIgnoringAccents(cadena, aBuscar) {
   }
 }
 
-sortObjectArrayByKey = function(arr, key, order="asc") { 
+function sortObjectArrayByKey(arr, key, order="asc") { 
   return arr.sort(
             function( el_1, el_2 ) {
               eln_1 = normalizeString(el_1[key])
